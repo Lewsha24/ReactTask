@@ -1,30 +1,23 @@
-import {useEffect, useState} from 'react';
+import { useState, useCallback } from 'react';
 
-function getValueStorage(key, initialState) {
-    const saveValue = JSON.parse(localStorage.getItem(key))
-
-    if(saveValue) {
-        return saveValue
-    }
-    if (initialState instanceof Function) {
-        return initialState;
-    }else {1
-        console.log("Вы не передали второе значение в локальный хук : use LocalStoreage(vale, initialState)")
-        return initialState;
-    }
-
-}
-
-
-export function useLocalStorage(key,initialState) {
-
+export const useLocalStorage = (key) => {
     const [value, setValue] = useState(() => {
-        return getValueStorage(key, initialState)
-    })
+        const storedValue = window.localStorage.getItem(key);
+        return storedValue !== null ? storedValue : null;
+    });
 
-    useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(value))
-    },[value])
+    const setItem = useCallback(
+        (newValue) => {
+            window.localStorage.setItem(key, newValue);
+            setValue(newValue);
+        },
+        [key]
+    );
 
-    return [value, setValue]
-}
+    const removeItem = useCallback(() => {
+        window.localStorage.removeItem(key);
+        setValue(null);
+    }, [key]);
+
+    return [value, { setItem, removeItem }];
+};

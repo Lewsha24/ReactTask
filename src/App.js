@@ -1,30 +1,29 @@
 import React, {useTransition} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import {useFetch} from "./useFetch";
+import {useLocalStorage} from "./useLocalStorage";
 
 //Task 2
 //Answer 2
-function App() {
-    import { useLocalStorage } from './useLocalStorage';
-    const [token, { setItem, removeItem }] = useLocalStorage('token');
-
-    return (
-        <div>
-            <p>
-                Твой токен: { token }
-            </p>
-            <div>
-                <button onClick={() => setItem('new-token')}>
-                    Задать токен
-                </button>
-                <button onClick={() => removeItem()}>
-                    Удалить токен
-                </button>
-            </div>
-        </div>
-    );
-}
+// function App() {
+//     const [token, { setItem, removeItem }] = useLocalStorage('token');
+//
+//     return (
+//         <div>
+//             <p>
+//                 Твой токен: { token }
+//             </p>
+//             <div>
+//                 <button onClick={() => setItem('new-token')}>
+//                     Задать токен
+//                 </button>
+//                 <button onClick={() => removeItem()}>
+//                     Удалить токен
+//                 </button>
+//             </div>
+//         </div>
+//     );
+// }
 
 // Task 1
 // Answer 1
