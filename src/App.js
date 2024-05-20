@@ -1,7 +1,25 @@
 import React, {useTransition} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import { useHover } from './useHover';
+// import { useLocalStorage } from './useLocalStorage';
+// import { useFetch } from './useFetch';
 import './App.css';
-import {useLocalStorage} from "./useLocalStorage";
+
+// Чтобы проверить, что все работает, вам стоит раскомментировать каждый компонент по отдельности
+// Так же вам стоит раскомментировать импортированный  кастомный класс
+
+//Task 3
+//Answer 3
+// function App() {
+//     const { hovered, ref } = useHover();
+//     console.log(ref.current)
+//     return (
+//         <div ref={ref}>
+//             {hovered ? 'На меня навели мышку' : 'Наведи мышкой на меня'}
+//         </div>
+//     );
+// }
+//
 
 //Task 2
 //Answer 2
