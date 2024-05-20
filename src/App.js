@@ -1,22 +1,32 @@
-import React, {useEffect, useState} from "react";
+import React, {useTransition} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
 import './App.css';
-import {useArray} from "./useArray";
-import {useThrottle} from "./useThrottle";
+import {useFetch} from "./useFetch";
 
 function App() {
-   const [value,setValue] = useState('')
-    const throttleValue = useThrottle(value, 1000)
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-          <input type="text" value={value} onChange={(e) => setValue(e.target.value)}/>
-          <p>{throttleValue}</p>
-      </header>
-    </div>
-  );
+        const {
+            data,
+            isLoading,
+            error,
+            refetch
+        } = useFetch('https://jsonplaceholder.typicode.com/posts');
+    console.log(isLoading)
+    return (
+        <div>
+            <div>
+                <button onClick={() => refetch({
+                    params: {
+                        _limit: 3
+                    }
+                })}>
+                    Перезапросить
+                </button>
+            </div>
+            {isLoading && 'Загрузка...'}
+            {error && 'Произошла ошибка'}
+            {data && !isLoading && data.map(item => <div key={item.id}>{item.title}</div>) }
+        </div>
+    );
 }
 
 
